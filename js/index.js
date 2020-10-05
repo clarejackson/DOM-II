@@ -20,24 +20,14 @@ const footer = document.querySelector("footer");
 
 function zoom(event) {
   event.preventDefault();
-
   scale += event.deltaY * -0.01;
-
-  // Restrict scale
   scale = Math.min(Math.max(0.125, scale), 4);
-
-  // Apply scale transform
   footer.style.transform = `scale(${scale})`;
   event.stopPropagation();
 }
 
 let scale = 1;
-// const el = document.querySelector("div");
 footer.onwheel = zoom;
-
-
-// footer.style.backgroundColor = "peach"
-// footer.addEventListener('wheel', zoom);
 
 //   * `load`
 window.addEventListener("load", (e) => {
@@ -47,7 +37,6 @@ window.addEventListener("load", (e) => {
 
 
 //   * `focus` 
-//may use input created by select?
 const aFocus = document.getElementsByTagName("a");
 aFocus[1].addEventListener("focus", (event) => {
   event.target.style.color = "white";
@@ -78,8 +67,34 @@ h2.addEventListener("dblclick", (e) => {
   e.stopPropagation();
 });
 
+//   * keyup
+const destination = document.getElementsByTagName('h4');
+window.addEventListener('keyup', event => {
+  if(event.code === 1){
+    return;
+  }
+  destination[0].style.color= 'green'
+  destination[0].style.fontSize = '10rem'
+});
+
+//   * click
+destination[1].addEventListener('click', (e) => {
+  destination[1].style.border = '10px solid purple';
+  e.stopPropagation();
+})
 
 //* [ ] Nest two similar events somewhere in the site and prevent the event propagation properly. Remember not all event types bubble.
+const top = document.getElementsByClassName('content-pick');
+top[0].addEventListener('click', (e) => {
+  top[0].style.border = '10px dotted limegreen';
+  // e.stopPropagation();
+});
+
+const navClick = document.getElementsByClassName("destination");
+navClick[2].addEventListener('click', (e) => {
+  navClick[2].style.border = '10px dashed red';
+  e.stopPropagation();
+})
 
 
 
